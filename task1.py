@@ -1,23 +1,14 @@
 def total_salary(path):
-
-    
     try:
-        total = 0
-        count = 0
         with open(path, "r", encoding="utf-8") as file:
+            salaries = []
             for line in file:
-                line = line.strip()  
-                if not line:  
-                    continue
-                name, salary = line.split(",")  
-                total += int(salary)
-                count += 1
+                name, salary = line.strip().split(",")
+                salaries.append(float(salary))  # float замість int
 
-        if count > 0:
-            average = total / count
-        else:
-            average = 0
-        return total, average
+            total = sum(salaries)
+            average = total / len(salaries) if salaries else 0
+            return total, average
 
     except FileNotFoundError:
         print("Помилка: файл не знайдено.")
